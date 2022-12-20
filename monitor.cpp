@@ -252,6 +252,7 @@ void printJsonLog(Host* host_info, Con* head){
 	FILE* fp;
 	time_t curTime = time(NULL);
 	struct tm *pLocal = localtime(&curTime);
+	char path[30] = "./logs/";
 	char fname[20];
 	cJSON* json = cJSON_CreateObject();
 	cJSON* host = cJSON_CreateObject();
@@ -342,7 +343,7 @@ void printJsonLog(Host* host_info, Con* head){
 		tmp = cJSON_CreateNumber(ptr->per_mem);
 		cJSON_AddItemToObject(container, "per_mem", tmp);
 	}
-	fp = fopen(fname, "w");
+	fp = fopen(strcat(path, fname), "w");
 	fputs(cJSON_Print(json), fp);
 	fclose(fp);
 
